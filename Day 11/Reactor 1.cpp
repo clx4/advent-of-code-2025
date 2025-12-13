@@ -7,12 +7,12 @@
 
 using namespace std;
 
-int backtrack(const unordered_map<string, vector<string>>& graph, const string& device, const string& target) {
+int count_paths(const unordered_map<string, vector<string>>& device_outputs, const string& device, const string& target) {
     if (device == target) return 1;
 
     int num_paths = 0;
-    for (const auto& output : graph.at(device)) {
-        num_paths += backtrack(graph, output, target);
+    for (const auto& output : device_outputs.at(device)) {
+        num_paths += count_paths(device_outputs, output, target);
     }
 
     return num_paths;
@@ -34,7 +34,7 @@ int main() {
         }
     }
 
-    int num_paths = backtrack(device_outputs, "you", "out");
+    const int num_paths = count_paths(device_outputs, "you", "out");
 
     cout << num_paths << endl;
 }
