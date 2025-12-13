@@ -39,9 +39,7 @@ int main() {
         while (ss >> c) {
             if (c == ']') break;
 
-            if (c == '#') {
-                machine_config |= indicator_flag;
-            }
+            if (c == '#') machine_config |= indicator_flag;
 
             indicator_flag <<= 1;
         }
@@ -74,10 +72,7 @@ int main() {
         const auto& machine_buttons = buttons[i];
         int fewest_presses = machine_buttons.size();
 
-        // For every length of combos of button presses
-        for (size_t j = 0; j < machine_buttons.size(); j++) {
-            fewest_presses = backtrack(0, machine_configs[i], 0, 0, machine_buttons);
-        }
+        fewest_presses = backtrack(0, machine_configs[i], 0, 0, machine_buttons);
 
         total_fewest_presses += fewest_presses;
     }
